@@ -15,9 +15,9 @@ A web-based calculator and visualizer for Legend of Speed pets. Quickly find gli
 
 ## 🌟 Screenshot 
 ![SS1](images/SS1.jpg)
-![SS2](images/SS2.jpg)
+![SS2](images/SS4.jpg)
 ![SS3](images/SS3.jpg)
-![SS4](images/SS4.jpg)
+![SS4](images/SS2.jpg)
 
 ---
 
