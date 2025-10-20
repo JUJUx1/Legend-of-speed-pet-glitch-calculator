@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Legend of Speed Pet Glitch Calculator</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Legend of Speed Pet Glitch Calculator</h1>
+    <p class="subtitle">Calculate which pet levels can be glitched with yellow orbs</p>
+  </header>
+
+  <div class="calculator">
+    <!-- Input Section -->
+    <div class="input-section">
+      <h2>Input Parameters</h2>
+      <div class="form-group">
+        <label for="rebirth">Rebirth (R)</label>
+        <input type="number" id="rebirth" min="0" value="0">
+      </div>
+      <div class="form-group">
+        <label for="rarity">Pet Rarity</label>
+        <select id="rarity">
+          <option value="OMEGA">OMEGA</option>
+          <option value="UNIQUE">UNIQUE</option>
+          <option value="EPIC">EPIC</option>
+          <option value="RARE">RARE</option>
+          <option value="ADVANCE">ADVANCE</option>
+          <option value="BASIC">BASIC</option>
+        </select>
+      </div>
+      <div class="optional-inputs">
+        <div class="optional-title">Optional Inputs</div>
+        <div class="form-group">
+          <label for="current-level">Current Pet Level (1-50)</label>
+          <input type="number" id="current-level" min="1" max="50" placeholder="Leave empty to start from level 1">
+        </div>
+        <div class="form-group">
+          <label for="current-exp">Current EXP at Current Level</label>
+          <input type="number" id="current-exp" min="0" placeholder="Leave empty to start from 0 EXP">
+        </div>
+      </div>
+      <button id="calculate-btn">Calculate Glitchable Levels</button>
+      <div class="info-box">
+        <div class="info-title">How the Glitch Works</div>
+        <p>A pet glitch occurs when the yellow orb EXP matches exactly the remaining EXP needed to level up. If there's any overflow, the glitch fails.</p>
+        <p>Yellow orb EXP = 15 × (Rebirth + 1)</p>
+      </div>
+    </div>
+
+    <!-- Results Section -->
+    <div class="results-section">
+      <h2>Results</h2>
+      <div class="summary">
+        <p>Yellow Orb EXP: <span class="orb-exp" id="orb-exp-value">15</span></p>
+        <p>Glitchable Levels: <span class="levels-count" id="levels-count">0</span></p>
+      </div>
+      <div class="results-container" id="results-container">
+        <div class="no-results">Enter parameters and click Calculate to see results</div>
+      </div>
+    </div>
+
+    <!-- Chart Section -->
+    <div class="chart-section">
+      <h2>Glitch Chart</h2>
+      <div class="chart-controls">
+        <div class="form-group">
+          <label for="chart-rarity">Rarity to Display</label>
+          <select id="chart-rarity">
+            <option value="OMEGA">OMEGA</option>
+            <option value="UNIQUE">UNIQUE</option>
+            <option value="EPIC">EPIC</option>
+            <option value="RARE">RARE</option>
+            <option value="ADVANCE">ADVANCE</option>
+            <option value="BASIC">BASIC</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="min-rebirth-chart">Min Rebirth</label>
+          <input type="number" id="min-rebirth-chart" min="0" value="0">
+        </div>
+        <div class="form-group">
+          <label for="max-rebirth-chart">Max Rebirth</label>
+          <input type="number" id="max-rebirth-chart" min="1" max="100" value="20">
+        </div>
+        <button id="generate-chart-btn">Generate Chart</button>
+        <button id="export-chart-btn">Export Chart as PNG</button>
+        <button id="export-txt-btn">Export TXT of First Glitch Level</button>
+      </div>
+
+      <div class="chart-container">
+        <canvas id="glitch-chart"></canvas>
+      </div>
+      <div class="chart-legend" id="chart-legend"></div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Legend of Speed Pet Glitch Calculator &copy; 2023 | For educational purposes</p>
+  </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="script.js"></script>
+</body>
+        </html>
