@@ -53,5 +53,8 @@ This project is **for educational purposes**. Feel free to fork, modify, and exp
 ---
 
 ## 🌟 Screenshot 
+(images/SS1.jpg)
+(images/SS2.jpg)
+(images/SS3.jpg)
+(images/SS4.jpg)
 
-![Legend of Speed Calculator](images/screenshot.png)
