@@ -59,7 +59,7 @@ A web-based calculator and visualizer for Legend of Speed pets. Quickly find gli
 This project is **for educational purposes**. Feel free to fork, modify, and experiment with it.
 
 ---
-## 🔗 
+## 🔗 Website
 
 https://jujux1.github.io/Legend-of-speed-pet-glitch-calculator/
 
