@@ -13,6 +13,14 @@ A web-based calculator and visualizer for Legend of Speed pets. Quickly find gli
 
 ---
 
+## 🌟 Screenshot 
+![SS1](images/SS1.jpg)
+![SS2](images/SS2.jpg)
+![SS3](images/SS3.jpg)
+![SS4](images/SS4.jpg)
+
+---
+
 ## 📋 How to Use
 
 1. Open the **index.html** in any browser.
@@ -51,10 +59,7 @@ A web-based calculator and visualizer for Legend of Speed pets. Quickly find gli
 This project is **for educational purposes**. Feel free to fork, modify, and experiment with it.
 
 ---
+## 🔗 
 
-## 🌟 Screenshot 
-![SS1](images/SS1.jpg)
-![SS2](images/SS2.jpg)
-![SS3](images/SS3.jpg)
-![SS4](images/SS4.jpg)
+https://jujux1.github.io/Legend-of-speed-pet-glitch-calculator/
 
