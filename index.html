@@ -4,7 +4,285 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Legend of Speed Pet Glitch Calculator</title>
-<link rel="stylesheet" href="style.css">
+<style>
+:root {
+  --bg-dark: #0f0c29;
+  --bg-darker: #0a0720;
+  --accent-gold: #fdbb2d;
+  --accent-red: #b21f1f;
+  --text-light: #ffffff;
+  --text-gray: #cccccc;
+  --card-bg: rgba(20, 15, 50, 0.85);
+  --input-bg: rgba(30, 25, 60, 0.9);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, var(--bg-dark), var(--bg-darker));
+  color: var(--text-light);
+  line-height: 1.6;
+  min-height: 100vh;
+  padding: 16px;
+}
+
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 24px;
+  padding: 16px 0;
+}
+
+header h1 {
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+  background: linear-gradient(to right, var(--accent-gold), #ff7e5f);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.subtitle {
+  color: var(--text-gray);
+  font-size: 1rem;
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+  gap: 16px;
+}
+
+.menu-button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(to right, var(--accent-gold), #ff7e5f);
+  color: #000;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 150px;
+}
+
+.menu-button:hover {
+  opacity: 0.95;
+  transform: scale(1.02);
+}
+
+.menu-button.active {
+  box-shadow: 0 0 0 3px rgba(253, 187, 45, 0.5);
+  transform: scale(1.05);
+}
+
+.calculator, .chart-view {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-section, .results-section, .chart-section {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.input-section h2,
+.results-section h2,
+.chart-section h2 {
+  margin-bottom: 16px;
+  color: var(--accent-gold);
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-gray);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+input, select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--input-bg);
+  color: white;
+  font-size: 1rem;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 0 3px rgba(253, 187, 45, 0.3);
+}
+
+button:not(.menu-button) {
+  width: 100%;
+  padding: 14px;
+  margin: 12px 0;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(to right, var(--accent-gold), #ff7e5f);
+  color: #000;
+  font-weight: bold;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+button:not(.menu-button):hover {
+  opacity: 0.95;
+  transform: scale(1.02);
+}
+
+.info-box {
+  margin-top: 20px;
+  padding: 16px;
+  background: rgba(178, 31, 31, 0.15);
+  border-left: 4px solid var(--accent-red);
+  border-radius: 10px;
+  font-size: 0.95rem;
+}
+
+.info-title {
+  font-weight: bold;
+  color: var(--accent-gold);
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+}
+
+.summary {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  padding: 0 8px;
+}
+
+.orb-exp, .levels-count {
+  color: var(--accent-gold);
+  font-weight: bold;
+}
+
+.results-container {
+  max-height: 250px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.result-item {
+  background: rgba(30, 25, 60, 0.7);
+  padding: 14px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(253, 187, 45, 0.25);
+}
+
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-size: 1rem;
+}
+
+.level {
+  font-weight: bold;
+  color: var(--accent-gold);
+}
+
+.exp-needed {
+  color: var(--text-gray);
+}
+
+.orbs-needed {
+  color: #7fffd4;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.no-results {
+  text-align: center;
+  color: var(--text-gray);
+  font-style: italic;
+  padding: 20px;
+  font-size: 1rem;
+}
+
+.chart-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.chart-controls .form-group {
+  margin-bottom: 0;
+}
+
+.chart-container {
+  height: 280px;
+  margin-top: 12px;
+}
+
+footer {
+  text-align: center;
+  margin-top: 30px;
+  padding: 16px;
+  color: var(--text-gray);
+  font-size: 0.85rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Scrollbar styling */
+.results-container::-webkit-scrollbar {
+  width: 6px;
+}
+.results-container::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.2);
+  border-radius: 3px;
+}
+.results-container::-webkit-scrollbar-thumb {
+  background: var(--accent-gold);
+  border-radius: 3px;
+}
+
+/* Prevent zoom on input focus */
+input, select {
+  font-size: 16px;
+}
+
+/* Hide sections by default */
+#calculator-section, #chart-section {
+  display: none;
+}
+
+/* Active section display */
+#calculator-section.active, #chart-section.active {
+  display: flex;
+}
+</style>
 </head>
 <body>
 <div class="container">
@@ -12,8 +290,15 @@
     <h1>Legend of Speed Pet Glitch Calculator</h1>
     <p class="subtitle">Calculate which pet levels can be glitched with yellow orbs</p>
   </header>
+  
+  <!-- Menu Navigation -->
+  <div class="menu">
+    <button class="menu-button active" data-section="calculator">CALCULATOR</button>
+    <button class="menu-button" data-section="charts">CHARTS</button>
+  </div>
 
-  <div class="calculator">
+  <!-- Calculator Section -->
+  <div id="calculator-section" class="calculator active">
     <!-- Input Section -->
     <div class="input-section">
       <h2>Input Parameters</h2>
@@ -32,17 +317,6 @@
           <option value="BASIC">BASIC</option>
         </select>
       </div>
-      <div class="optional-inputs">
-        <div class="optional-title">Optional Inputs</div>
-        <div class="form-group">
-          <label for="current-level">Current Pet Level (1-50)</label>
-          <input type="number" id="current-level" min="1" max="50" placeholder="Leave empty to start from level 1">
-        </div>
-        <div class="form-group">
-          <label for="current-exp">Current EXP at Current Level</label>
-          <input type="number" id="current-exp" min="0" placeholder="Leave empty to start from 0 EXP">
-        </div>
-      </div>
       <button id="calculate-btn">Calculate Glitchable Levels</button>
       <div class="info-box">
         <div class="info-title">How the Glitch Works</div>
@@ -50,7 +324,6 @@
         <p>Yellow orb EXP = 15 × (Rebirth + 1)</p>
       </div>
     </div>
-
     <!-- Results Section -->
     <div class="results-section">
       <h2>Results</h2>
@@ -62,7 +335,10 @@
         <div class="no-results">Enter parameters and click Calculate to see results</div>
       </div>
     </div>
+  </div>
 
+  <!-- Charts Section -->
+  <div id="chart-section" class="chart-view">
     <!-- Chart Section -->
     <div class="chart-section">
       <h2>Glitch Chart</h2>
@@ -90,20 +366,222 @@
         <button id="export-chart-btn">Export Chart as PNG</button>
         <button id="export-txt-btn">Export TXT of First Glitch Level</button>
       </div>
-
       <div class="chart-container">
         <canvas id="glitch-chart"></canvas>
       </div>
-      <div class="chart-legend" id="chart-legend"></div>
     </div>
   </div>
 
   <footer>
-    <p>Legend of Speed Pet Glitch Calculator &copy; 2023 | For educational purposes</p>
+    <p>Legend of Speed Pet Glitch Calculator &copy; 2025 | Use For Glitching Pets</p>
   </footer>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="script.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const rebirthInput = document.getElementById('rebirth');
+    const raritySelect = document.getElementById('rarity');
+    const calculateBtn = document.getElementById('calculate-btn');
+    const orbExpValue = document.getElementById('orb-exp-value');
+    const levelsCount = document.getElementById('levels-count');
+    const resultsContainer = document.getElementById('results-container');
+    const chartRaritySelect = document.getElementById('chart-rarity');
+    const minRebirthChartInput = document.getElementById('min-rebirth-chart');
+    const maxRebirthChartInput = document.getElementById('max-rebirth-chart');
+    const generateChartBtn = document.getElementById('generate-chart-btn');
+    const exportChartBtn = document.getElementById('export-chart-btn');
+    const exportTxtBtn = document.getElementById('export-txt-btn');
+    const chartCanvas = document.getElementById('glitch-chart');
+    let glitchChart = null;
+
+    // Menu navigation
+    const menuButtons = document.querySelectorAll('.menu-button');
+    const calculatorSection = document.getElementById('calculator-section');
+    const chartSection = document.getElementById('chart-section');
+
+    menuButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove active class from all buttons and sections
+            menuButtons.forEach(btn => btn.classList.remove('active'));
+            calculatorSection.classList.remove('active');
+            chartSection.classList.remove('active');
+            
+            // Add active class to clicked button and corresponding section
+            this.classList.add('active');
+            const section = this.getAttribute('data-section');
+            if (section === 'calculator') {
+                calculatorSection.classList.add('active');
+            } else if (section === 'charts') {
+                chartSection.classList.add('active');
+            }
+        });
+    });
+
+    function generateCumulativeExpTable(baseExp){
+        const table=[];
+        let cum=0;
+        for(let i=1;i<=50;i++){cum+=baseExp*i; table.push(cum);}
+        return table;
+    }
+
+    const petExpTables={
+        'OMEGA':generateCumulativeExpTable(10000),
+        'UNIQUE':generateCumulativeExpTable(5000),
+        'EPIC':generateCumulativeExpTable(4000),
+        'RARE':generateCumulativeExpTable(3000),
+        'ADVANCE':generateCumulativeExpTable(2000),
+        'BASIC':generateCumulativeExpTable(1000)
+    };
+
+    function updateOrbExp(){
+        const orbExp=15*((parseInt(rebirthInput.value)||0)+1);
+        orbExpValue.textContent=orbExp;
+    }
+
+    function calculateGlitchableLevels(){
+        const rebirth=parseInt(rebirthInput.value)||0;
+        const rarity=raritySelect.value;
+        const currentLevel = 1;
+        const currentExp = 0;
+        const orbExp=15*(rebirth+1);
+        const table=petExpTables[rarity];
+        let currExp=0;
+        const glitchLevels=[];
+        for(let lvl=currentLevel;lvl<=50;lvl++){
+            const rem=table[lvl-1]-currExp;
+            if(rem>0 && rem%orbExp===0){
+                glitchLevels.push({level:lvl, expNeeded:rem, orbsNeeded:rem/orbExp});
+            }
+        }
+        displayResults(glitchLevels,orbExp);
+    }
+
+    function displayResults(levels,orbExp){
+        orbExpValue.textContent=orbExp;
+        levelsCount.textContent=levels.length;
+        resultsContainer.innerHTML='';
+        if(levels.length===0){
+            resultsContainer.innerHTML='<div class="no-results">No glitchable levels found</div>'; 
+            return;
+        }
+        levels.forEach(item=>{
+            const div=document.createElement('div');
+            div.className='result-item';
+            div.innerHTML=`<div class="result-header"><span class="level">Level ${item.level}</span><span class="exp-needed">EXP: ${item.expNeeded.toLocaleString()}</span></div><div class="orbs-needed">Orbs Needed: ${item.orbsNeeded}</div>`;
+            resultsContainer.appendChild(div);
+        });
+    }
+
+    function generateChart(){
+        const rarity = chartRaritySelect.value;
+        const minR = parseInt(minRebirthChartInput.value) || 0;
+        const maxR = parseInt(maxRebirthChartInput.value) || 20;
+        const table = petExpTables[rarity];
+        const chartData = [];
+        for(let r = minR; r <= maxR; r++){
+            let firstLevel = null;
+            for(let lvl=1; lvl<=50; lvl++){
+                const orbExp = 15*(r+1);
+                const rem = table[lvl-1];
+                if(rem % orbExp === 0){
+                    firstLevel = lvl;
+                    break;
+                }
+            }
+            if(firstLevel) chartData.push({x: r, y: firstLevel});
+        }
+        if(glitchChart) glitchChart.destroy();
+        const ctx = chartCanvas.getContext('2d');
+        glitchChart = new Chart(ctx, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'First Glitch Level',
+                    data: chartData,
+                    backgroundColor: '#fdbb2d',
+                    borderColor: '#b21f1f',
+                    pointRadius: 8
+                }]
+            },
+            options: {
+                responsive:true,
+                maintainAspectRatio:false,
+                scales: {
+                    x: {
+                        type: 'linear',
+                        title: {display:true,text:'Rebirth',color:'#fdbb2d', font:{size:14,weight:'bold'}},
+                        ticks: {stepSize:1, color:'#ddd', font:{size:11}},
+                        min: minR,
+                        max: maxR,
+                        grid:{color:'rgba(255,255,255,0.1)'}
+                    },
+                    y: {
+                        title:{display:true,text:'Pet Level',color:'#fdbb2d', font:{size:14,weight:'bold'}},
+                        ticks:{color:'#ddd', stepSize:5, font:{size:11}},
+                        min: 1,
+                        max: 50,
+                        reverse: true,
+                        grid:{color:'rgba(255,255,255,0.1)'}
+                    }
+                },
+                plugins: {
+                    legend:{display:false},
+                    tooltip: {
+                        callbacks: {
+                            label: function(ctx){
+                                return `Level ${ctx.raw.y} at Rebirth ${ctx.raw.x}`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    function exportTxt(){
+        const rarity = chartRaritySelect.value;
+        const minR = parseInt(minRebirthChartInput.value) || 0;
+        const maxR = parseInt(maxRebirthChartInput.value) || 20;
+        const table = petExpTables[rarity];
+        let txt=`Legend of Speed Pet Glitchable Levels - ${rarity}\n`;
+        txt += `Rebirth | First Glitch Level\n`;
+        txt += `--------|-----------------\n`;
+        for(let r = minR; r <= maxR; r++){
+            let firstLevel = 'None';
+            for(let lvl=1; lvl<=50; lvl++){
+                const orbExp = 15*(r+1);
+                const rem = table[lvl-1];
+                if(rem % orbExp === 0){
+                    firstLevel = lvl;
+                    break;
+                }
+            }
+            txt += `${r.toString().padEnd(7)} | ${firstLevel}\n`;
+        }
+        const blob = new Blob([txt], {type:'text/plain'});
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'glitchable_levels.txt';
+        link.click();
+    }
+
+    // Events
+    updateOrbExp();
+    calculateBtn.addEventListener('click',calculateGlitchableLevels);
+    rebirthInput.addEventListener('input',updateOrbExp);
+    generateChartBtn.addEventListener('click',generateChart);
+    exportChartBtn.addEventListener('click',()=>{
+        if(glitchChart){ 
+            const link = document.createElement('a'); 
+            link.href = glitchChart.toBase64Image(); 
+            link.download = 'glitch-chart.png'; 
+            link.click(); 
+        }
+    });
+    exportTxtBtn.addEventListener('click',exportTxt);
+    generateChart();
+});
+</script>
 </body>
-        </html>
+</html>
