@@ -53,8 +53,8 @@ This project is **for educational purposes**. Feel free to fork, modify, and exp
 ---
 
 ## 🌟 Screenshot 
-(images/SS1.jpg)
-(images/SS2.jpg)
-(images/SS3.jpg)
-(images/SS4.jpg)
+![SS1](images/SS1.jpg)
+![SS2](images/SS2.jpg)
+![SS3](images/SS3.jpg)
+![SS4](images/SS4.jpg)
 
